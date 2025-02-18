@@ -41,9 +41,15 @@ function App() {
 
   return (
     <div className='main'>
-      <img src={va} alt="" id="quza" className='mt-5 object-contain h-[50%] lg:h-[60%]' />
 
-      <div className='flex flex-col items-center gap-5'>
+      <div className="star-field">
+        <div className="layer"></div>
+        <div className="layer"></div>
+        <div className="layer"></div>
+      </div>
+      <img src={va} alt="" id="quza" className='object-contain h-60%] md:h-[60%] rounded-full shadow-lg shadow-white/10' />
+
+      <div className='flex flex-col items-center gap-5 lg:gap-10'>
         <span>I'm Quza, Your Advanced Virtual Assistant</span>
 
         {!speaking ? (
@@ -66,7 +72,7 @@ function App() {
               <div className='flex flex-col gap-4 w-full items-center'>
                 <textarea
                   type="text"
-                  className='w-full rounded focus:outline-none text-gray-300 p-2 bg-black/35 border border-[#4fe0ea]'
+                  className='w-full rounded focus:outline-none text-gray-300 p-2 bg-black border border-[#4fe0ea]'
                   value={textPrompt}
                   onChange={(e) => setTextPrompt(e.target.value)}
                   placeholder="Type your prompt here"
