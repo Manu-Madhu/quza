@@ -4,7 +4,7 @@ import { TbWritingSign } from "react-icons/tb";
 import { datacontext } from './context/UserContext';
 import speakimg from "./assets/speak.gif";
 import aigif from "./assets/aiVoice.gif";
-import va from "./assets/ai1.png";
+import va from "./assets/ai2.png";
 import "./App.css";
 import run from './gemini';
 
