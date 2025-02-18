@@ -17,7 +17,7 @@ function UserContext({ children }) {
     }
     async function aiResponse(prompt) {
         let text = await run(prompt)
-        let newText = text.split(" ") && text.split(" ") && text.replace("google", "Quzza") && text.replace("Google", "Quzza")
+        let newText = text.split(" ") && text.split(" ") && text.replace("google", "Qmark technolabs") && text.replace("Google", "Qmark technolabs")
         setPrompt(newText)
         speak(newText)
         setResponse(true)
