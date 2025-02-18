@@ -4,7 +4,7 @@ import { TbWritingSign } from "react-icons/tb";
 import { datacontext } from './context/UserContext';
 import speakimg from "./assets/speak.gif";
 import aigif from "./assets/aiVoice.gif";
-import va from "./assets/ai.png";
+import va from "./assets/ai1.png";
 import "./App.css";
 import run from './gemini';
 
@@ -41,9 +41,9 @@ function App() {
 
   return (
     <div className='main'>
-      <img src={va} alt="" id="quza" />
+      <img src={va} alt="" id="quza" className='mt-5 object-contain h-[50%] lg:h-[60%]' />
 
-      <div className='flex flex-col items-center gap-5 mt-5'>
+      <div className='flex flex-col items-center gap-5'>
         <span>I'm Quza, Your Advanced Virtual Assistant</span>
 
         {!speaking ? (
@@ -84,7 +84,7 @@ function App() {
             ) : (
               <img src={aigif} alt="" id="aigif" />
             )}
-            <p>{prompt}</p>
+            <p className='lg:text-wrap text-xs lg:text-sm'>{prompt}</p>
           </div>
         )}
       </div>

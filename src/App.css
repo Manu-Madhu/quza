@@ -9,9 +9,7 @@
   padding: 10px;
   gap:10px
 }
-#quza{
-  height: 60%;
-}
+
 span{
  background: linear-gradient(to right,rgb(34, 221, 231),rgb(237, 4, 125));
   font-size: 2vmax;
@@ -46,7 +44,7 @@ padding: 0px 40px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap:10px
+  gap:5px
 
 }
 #aigif{

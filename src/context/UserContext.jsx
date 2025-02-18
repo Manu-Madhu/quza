@@ -5,25 +5,43 @@ export const datacontext = createContext()
 function UserContext({ children }) {
     let [speaking, setSpeaking] = useState(false)
     let [prompt, setPrompt] = useState("listening...")
-    let [response, setResponse] = useState(false)
+    let [response, setResponse] = useState(false);
 
     function speak(text) {
-        let text_speak = new SpeechSynthesisUtterance(text)
-        text_speak.volume = 1;
-        text_speak.rate = 1;
-        text_speak.pitch = 1;
-        text_speak.lang = "hi-GB"
-        window.speechSynthesis.speak(text_speak)
+        let sentences = text.match(/[^.!?]+[.!?]*/g) || [text]; // Fix text splitting
+        let index = 0;
+
+        function speakNext() {
+            if (index < sentences.length) {
+                let text_speak = new SpeechSynthesisUtterance(sentences[index]);
+                text_speak.lang = "hi-GB";
+
+                text_speak.onend = () => {
+                    index++;
+                    setTimeout(() => speakNext(), 100);
+                };
+
+                window.speechSynthesis.speak(text_speak);
+            } else {
+                setTimeout(() => setSpeaking(false), 300); // Ensure state update
+            }
+        }
+
+        window.speechSynthesis.cancel(); // Stop previous speech
+        setSpeaking(true);
+        speakNext();
     }
+
+
     async function aiResponse(prompt) {
         let text = await run(prompt)
         let newText = text.split(" ") && text.split(" ") && text.replace("google", "Qmark technolabs") && text.replace("Google", "Qmark technolabs")
         setPrompt(newText)
         speak(newText)
         setResponse(true)
-        setTimeout(() => {
-            setSpeaking(false)
-        }, 5000)
+        // setTimeout(() => {
+        //     setSpeaking(false)
+        // }, 5000)
     }
 
     let speechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
