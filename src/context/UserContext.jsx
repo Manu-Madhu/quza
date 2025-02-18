@@ -15,16 +15,42 @@ function UserContext({ children }) {
         text_speak.lang = "hi-GB"
         window.speechSynthesis.speak(text_speak)
     }
+    // async function aiResponse(prompt) {
+    //     let text = await run(prompt)
+    //     let newText = text.split(" ") && text.split(" ") && text.replace("google", "Qmark technolabs") && text.replace("Google", "Qmark technolabs")
+    //     setPrompt(newText)
+    //     speak(newText)
+    //     setResponse(true)
+    //     setTimeout(() => {
+    //         setSpeaking(false)
+    //     }, 5000)
+    // }
+
+
     async function aiResponse(prompt) {
-        let text = await run(prompt)
-        let newText = text.split(" ") && text.split(" ") && text.replace("google", "Qmark technolabs") && text.replace("Google", "Qmark technolabs")
-        setPrompt(newText)
-        speak(newText)
-        setResponse(true)
-        setTimeout(() => {
-            setSpeaking(false)
-        }, 5000)
+        let text = await run(prompt);
+        let newText = text
+            .replace("google", "Qmark technolabs")
+            .replace("Google", "Qmark technolabs");
+
+        setPrompt(newText);
+        setResponse(true);
+
+        // Create speech synthesis object
+        let text_speak = new SpeechSynthesisUtterance(newText);
+        text_speak.volume = 1;
+        text_speak.rate = 1;
+        text_speak.pitch = 1;
+        text_speak.lang = "hi-GB";
+
+        // Set event listener to detect when speech is complete
+        text_speak.onend = () => {
+            setSpeaking(false); // Only stop speaking after speech ends
+        };
+
+        window.speechSynthesis.speak(text_speak);
     }
+
 
     let speechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
     let recognition = new speechRecognition()
